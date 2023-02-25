@@ -1,0 +1,8 @@
+// { "response_code": 0, 
+// "results": [ 
+// { "category": "Entertainment: Japanese Anime & Manga", "type": "multiple", "difficulty": "easy", "question": "What is the last name of Edward and Alphonse in the Fullmetal Alchemist series.", "correct_answer": "Elric", "incorrect_answers": [ "Ellis", "Eliek", "Elwood" ] }, 
+// { "category": "Entertainment: Japanese Anime & Manga", "type": "boolean", "difficulty": "easy", "question": "Gosho Aoyama Made This Series: (Detective Conan / Case Closed!)", "correct_answer": "True", "incorrect_answers": [ "False" ] }, 
+// { "category": "Entertainment: Japanese Anime & Manga", "type": "multiple", "difficulty": "easy", "question": "In &quot;Future Diary&quot;, what is the name of Yuno Gasai&#039;s Phone Diary?", "correct_answer": "Yukiteru Diary", "incorrect_answers": [ "Murder Diary", "Escape Diary ", "Justice Diary " ] }, 
+// { "category": "Entertainment: Japanese Anime & Manga", "type": "boolean", "difficulty": "easy", "question": "Kiznaiver is an adaptation of a manga.", "correct_answer": "False", "incorrect_answers": [ "True" ] },
+// { "category": "Entertainment: Japanese Anime & Manga", "type": "multiple", "difficulty": "easy", "question": "What is the theme song of &quot;Neon Genesis Evangelion&quot;?", "correct_answer": "A Cruel Angel&#039;s Thesis", "incorrect_answers": [ "Stardust Crusaders", "Requiem for a Dream", "God Knows" ] } ] 
+// }
