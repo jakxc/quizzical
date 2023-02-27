@@ -4,7 +4,8 @@ import {nanoid} from 'nanoid';
 
 function Quiz()
 {
-    const [quizData, setQuizData] = useState([])
+    const [quizData, setQuizData] = useState([]);
+    const [selectedOptions, setSelectedOptions] = useState([])
 
     useEffect(()=>{
         fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy")
@@ -13,18 +14,19 @@ function Quiz()
     }, [])
 
     const questionElements = quizData.map(item => {
+        item.incorrect_answers.unshift(item.correct_answer);
         return <QuizElement 
                     key={nanoid()}
                     question={item.question}
                     correctAnswer={item.correct_answer}
-                    incorrectAnswers={item.incorrect_answers}
+                    options = {item.incorrect_answers}
                 />
     })
     
     return(
-        <div>
+        <main>
             {questionElements}
-        </div>
+        </main>
     )
 }
 

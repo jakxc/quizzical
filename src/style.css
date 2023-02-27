@@ -1,0 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Karla', sans-serif;
+}
+
+main {
+    background-color: #F5F5F5;
+    max-width: 800px;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.quiz-option {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(206, 179, 170);
+    text-align: center;
+    cursor: pointer; 
+}
+
+.quiz-options-container {
+    display: flex;
+    column-gap: 20px;
+}
