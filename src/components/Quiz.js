@@ -1,31 +1,39 @@
 import { useState, useEffect } from "react";
 import QuizElement from "./QuizElement";
-import {nanoid} from 'nanoid';
+import { nanoid } from 'nanoid';
 
 function Quiz()
 {
     const [quizData, setQuizData] = useState([]);
-    const [selectedOptions, setSelectedOptions] = useState([])
-
+    
     useEffect(()=>{
         fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy")
         .then(res => res.json())
-        .then(data => setQuizData(data.results))
+        .then(data => setQuizData(data.results.map(item => {
+            return {
+                id: nanoid(),
+                question: item.question,
+                incorrectAnswers: item.incorrect_answers,
+                correctAnswer: item.correct_answer,
+                selectedAnswer: ""
+            }
+        })))
     }, [])
 
-    const questionElements = quizData.map(item => {
-        item.incorrect_answers.unshift(item.correct_answer);
+
+    const quizElements = quizData.map(item => {
         return <QuizElement 
-                    key={nanoid()}
+                    key={item.id}
+                    id={item.id}
                     question={item.question}
-                    correctAnswer={item.correct_answer}
-                    options = {item.incorrect_answers}
+                    correctAnswer={item.correctAnswer}
+                    incorrectAnswers = {item.incorrectAnswers}
                 />
     })
     
     return(
         <main>
-            {questionElements}
+            {quizElements}
         </main>
     )
 }
