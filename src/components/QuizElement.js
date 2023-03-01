@@ -1,7 +1,7 @@
 function QuizElement(props)
 {    
     function styleButton(option, index){
-        if (props.showAnswers === true)
+        if (props.showAnswers)
         {
             if (props.question.correctAnswer === option)
             {
@@ -28,15 +28,16 @@ function QuizElement(props)
     const optionElements = props.question.options.map((option, index) => 
         <button
             key={index}
-            dangerouslySetInnerHTML={{__html: option}}
             onClick={(event) => props.selectAnswer(event, props.id, index)}
             style={styleButton(option, index)}
             disabled={props.showAnswers}
             className='quiz-option'
-        />)
+        >{decodeURIComponent(option)}
+        </button>
+    )
         
     return(<div className='quiz-question-container' >
-        <h1 className='quiz-question' dangerouslySetInnerHTML={{__html: props.question.question}}/>
+        <h1 className='quiz-question'>{decodeURIComponent(props.question.question)}</h1>
         <div className='quiz-options-container'>{optionElements}</div>
         <hr className='quiz-divider' />
     </div>)

@@ -62,19 +62,18 @@ function Quiz()
     
     useEffect(() => {
         
-        if(showStart === false) {
-            
-        fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy")
-            .then(res => res.json())
-            .then(data => setQuizData(data.results.map(item => {
-                return({
-                        question: item.question,
-                        options: item.incorrect_answers.concat([item.correct_answer]).map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value),
-                        selectedAnswer: undefined,
-                        correctAnswer: item.correct_answer
-                    })
-            })))
-            }
+        if(!showStart) {    
+            fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy&encode=url3986")
+                .then(res => res.json())
+                .then(data => setQuizData(data.results.map(item => {
+                    return({
+                            question: item.question,
+                            options: item.incorrect_answers.concat([item.correct_answer]).map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value),
+                            selectedAnswer: undefined,
+                            correctAnswer: item.correct_answer
+                        })
+                })))
+        }
     }, [showStart])
     
     useEffect(() => { 
