@@ -1,31 +1,45 @@
-import { nanoid } from 'nanoid'
-
 function QuizElement(props)
-{
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-      
-          // swap elements array[i] and array[j]
-          [array[i], array[j]] = [array[j], array[i]];
+{    
+    function styleButton(option, index){
+        if (props.showAnswers === true)
+        {
+            if (props.question.correctAnswer === option)
+            {
+                return {
+                    backgroundColor: "#94D7A2"
+                }
+            } else if(props.question.selectedAnswer === index)
+            {
+                return {
+                    backgroundColor: "#F8BCBC"
+                }
+            } else
+            {
+                return {
+                    backgroundColor: "#F5F7FB"
+                }
+            }
+        }else 
+        {
+            return (props.question.selectedAnswer === index ? {backgroundColor: "#D6DBF5"} : {backgroundColor: "#F5F7FB"})
         }
-
-        return array;
-      } 
-
-    props.incorrectAnswers.push(props.correctAnswer);
-    const shuffledOptions = shuffle(props.incorrectAnswers);
+    }
+    
+    const optionElements = props.question.options.map((option, index) => 
+        <button
+            key={index}
+            dangerouslySetInnerHTML={{__html: option}}
+            onClick={(event) => props.selectAnswer(event, props.id, index)}
+            style={styleButton(option, index)}
+            disabled={props.showAnswers}
+            className='quiz-option'
+        />)
         
-    const optionElements = shuffledOptions.map(item => {
-        return <div key={nanoid()} className="quiz-option" onClick={() => {console.log(`clicked ${item}`)}}>{item}</div>
-    })
-
-    return(
-        <div>
-            <h4 className="quiz-question">{props.question}</h4>
-            <div className="quiz-options-container">{optionElements}</div>
-        </div>
-    )
+    return(<div className='quiz-question-container' >
+        <h1 className='quiz-question' dangerouslySetInnerHTML={{__html: props.question.question}}/>
+        <div className='quiz-options-container'>{optionElements}</div>
+        <hr className='quiz-divider' />
+    </div>)
 }
 
 export default QuizElement

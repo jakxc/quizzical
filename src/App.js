@@ -1,4 +1,3 @@
-import './style.css';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
 
