@@ -1,14 +1,16 @@
+import { nanoid } from 'nanoid'
+
 function QuizElement(props)
 {    
-    function styleButton(option, index){
+    function styleButton(option, id){
         if (props.showAnswers)
         {
-            if (props.question.correctAnswer === option)
+            if (props.data.correctAnswer === option)
             {
                 return {
                     backgroundColor: "#94D7A2"
                 }
-            } else if(props.question.selectedAnswer === index)
+            } else if (props.data.selectedAnswer === id)
             {
                 return {
                     backgroundColor: "#F8BCBC"
@@ -21,23 +23,23 @@ function QuizElement(props)
             }
         }else 
         {
-            return (props.question.selectedAnswer === index ? {backgroundColor: "#D6DBF5"} : {backgroundColor: "#F5F7FB"})
+            return (props.data.selectedAnswer === id ? {backgroundColor: "#D6DBF5"} : {backgroundColor: "#F5F7FB"})
         }
     }
     
-    const optionElements = props.question.options.map((option, index) => 
+    const optionElements = props.data.options.map(item => 
         <button
-            key={index}
-            onClick={(event) => props.selectAnswer(event, props.id, index)}
-            style={styleButton(option, index)}
+            key={item.id}
+            onClick={(event) => props.selectAnswer(event, props.id, item.id)}
+            style={styleButton(item.optionText, item.id)}
             disabled={props.showAnswers}
             className='quiz-option'
-        >{decodeURIComponent(option)}
+        >{decodeURIComponent(item.optionText)}
         </button>
     )
         
     return(<div className='quiz-question-container' >
-        <h1 className='quiz-question'>{decodeURIComponent(props.question.question)}</h1>
+        <h1 className='quiz-question'>{decodeURIComponent(props.data.question)}</h1>
         <div className='quiz-options-container'>{optionElements}</div>
         <hr className='quiz-divider' />
     </div>)

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Home from './Home.js';
 import QuizElement from './QuizElement.js'
 import blob from './images/blob.png';
+import { nanoid } from 'nanoid'
 
 function Quiz()
 {
@@ -33,42 +34,61 @@ function Quiz()
     {
         setQuizData(() => {
             return (
-                quizData.map((item, id) => {
-                if (questionID === id) {
-                    return({...item, selectedAnswer: optionID})
-                } else
-                {
-                    return(item)
-                }
-                
+                quizData.map((item) => {
+                    if (questionID === item.id) {
+                        return {...item, selectedAnswer: optionID}
+                    } else
+                    {
+                        return item
+                    }     
             }))
         })
     }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+      
+          // swap elements array[i] and array[j]
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+
+        return array;
+    }
     
     useEffect(() => {
-        var count = 0;
-        for(var i = 0; i < quizData.length; i++)
+        let count = 0;
+        for(let i = 0; i < quizData.length; i++)
         {
-          if (typeof quizData[i].selectedAnswer !== 'undefined')
-          {
-            if(quizData[i].options[quizData[i].selectedAnswer] === quizData[i].correctAnswer)
-            {
-              count++;
+            let quizElement = quizData[i];
+            if (typeof quizElement.selectedAnswer !== 'undefined')
+            {   
+                let selectedAnswer = "";
+                for (let j = 0; j < quizElement.options.length; j++)
+                {
+                    if (quizElement.options[j].id === quizElement.selectedAnswer)
+                    {
+                        selectedAnswer = quizElement.options[j].optionText;
+                    }
+                }
+                if (selectedAnswer === quizElement.correctAnswer)
+                {
+                    count++;
+                }
             }
-          }
         }
         setScore(count)
     }, [showAnswers])
     
     useEffect(() => {
-        
-        if(!showStart) {    
+        if (!showStart) {    
             fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy&encode=url3986")
                 .then(res => res.json())
                 .then(data => setQuizData(data.results.map(item => {
                     return({
+                            id: nanoid(),
                             question: item.question,
-                            options: item.incorrect_answers.concat([item.correct_answer]).map(value => ({ value, sort: Math.random() })).sort((a, b) => a.sort - b.sort).map(({ value }) => value),
+                            options: shuffle(item.incorrect_answers.concat([item.correct_answer])).map(item => {return { id: nanoid(), optionText: item }}),
                             selectedAnswer: undefined,
                             correctAnswer: item.correct_answer
                         })
@@ -80,17 +100,15 @@ function Quiz()
         setAllComplete(quizData.every(item => typeof item.selectedAnswer !== 'undefined'))
     }, [quizData])
     
-    const quizElements = quizData.map((question, index) => {
-        return(<QuizElement
-                    key={index}
-                    question={question}
+    const quizElements = quizData.map(item => {
+        return (<QuizElement
+                    key={item.id}
+                    data={item}
                     showAnswers={showAnswers}
                     selectAnswer={selectAnswer}
-                    id={index}
+                    id={item.id}
                 />)
     })
-    
-    
     
     return (
         <div className='app'>
