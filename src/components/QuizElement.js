@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid'
-
 function QuizElement(props)
 {    
     function styleButton(option, id){
@@ -21,7 +19,7 @@ function QuizElement(props)
                     backgroundColor: "#F5F7FB"
                 }
             }
-        }else 
+        } else 
         {
             return (props.data.selectedAnswer === id ? {backgroundColor: "#D6DBF5"} : {backgroundColor: "#F5F7FB"})
         }
