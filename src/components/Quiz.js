@@ -7,10 +7,12 @@ import blob from './images/blob.png';
 
 function Quiz()
 {
-    const [score, setScore] = useState(0)
-    const [showAnswers, setShowAnswers] = useState(false)
-    const [quizData, setQuizData] = useState([])
-    const [allComplete, setAllComplete] = useState(false)
+    const [score, setScore] = useState(0);
+    const [showAnswers, setShowAnswers] = useState(false);
+    const [quizData, setQuizData] = useState([]);
+    const [allComplete, setAllComplete] = useState(false);
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     
     function checkAnswers()
     {
@@ -68,6 +70,7 @@ function Quiz()
     }, [showAnswers])
     
     useEffect(() => { 
+        setLoading(true);
         fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy&encode=url3986")
             .then(res => res.json())
             .then(data => setQuizData(data.results.map(item => {
@@ -79,6 +82,8 @@ function Quiz()
                         correctAnswer: item.correct_answer
                     })
             })))
+            .then(() => setLoading(false))
+            .catch(error => setError(error))
     }, [])
     
     useEffect(() => { 
@@ -97,7 +102,9 @@ function Quiz()
     
     return (
         <div className='app'>
-            <div className='quiz-container'>
+            {loading && <h1>Loading...</h1>}
+            {error && <pr>{JSON.stringify(error)}</pr>}
+            {!loading && !error && <div className='quiz-container'>
                 {quizElements}
                 {showAnswers ? 
                     <div className='score-container'>
@@ -106,7 +113,7 @@ function Quiz()
                     </div> 
                     :
                     <button className='button' disabled={!allComplete} onClick={checkAnswers}>Check Answers</button>}
-            </div>
+            </div>}
             <img className='blob1' src={blob} alt=''/>
             <img className='blob2' src={blob} alt=''/>
         </div>
