@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 import QuizElement from './QuizElement.js'
 import blob from './images/blob.png';
 
-function Quiz()
+const Quiz = () =>
 {
     const [score, setScore] = useState(0);
     const [showAnswers, setShowAnswers] = useState(false);

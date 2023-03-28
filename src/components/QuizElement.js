@@ -1,4 +1,4 @@
-function QuizElement(props)
+const QuizElement = (props) =>
 {    
     function styleButton(option, id){
         if (props.showAnswers)

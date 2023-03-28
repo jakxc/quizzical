@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Home()
+const Home = () =>
 {
     return (
         <div className='home-container'>
