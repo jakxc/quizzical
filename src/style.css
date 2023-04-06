@@ -146,6 +146,7 @@
 }
 
 .quiz-divider {
+  width: 100%;
   border: 1px solid #DBDEF0;
 }
 

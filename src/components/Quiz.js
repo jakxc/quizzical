@@ -14,12 +14,12 @@ const Quiz = () =>
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     
-    function checkAnswers()
+    const checkAnswers = () =>
     {
         setShowAnswers(true)
     }
     
-    function selectAnswer(event, questionID, optionID)
+    const selectAnswer = (event, questionID, optionID) =>
     {
         setQuizData(() => {
             return (
@@ -34,7 +34,7 @@ const Quiz = () =>
         })
     }
 
-    function shuffle(array) {
+    const shuffle = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
           let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
       
@@ -46,27 +46,22 @@ const Quiz = () =>
     }
     
     useEffect(() => {
-        let count = 0;
-        for (let i = 0; i < quizData.length; i++)
-        {
+        let currScore = 0;
+        for (let i = 0; i < quizData.length; i++) {
             let quizElement = quizData[i];
-            if (typeof quizElement.selectedAnswer !== 'undefined')
-            {   
+            if (quizElement.selectedAnswer !== undefined) {   
                 let selectedAnswer = "";
-                for (let j = 0; j < quizElement.options.length; j++)
-                {
-                    if (quizElement.options[j].id === quizElement.selectedAnswer)
-                    {
+                for (let j = 0; j < quizElement.options.length; j++) {
+                    if (quizElement.options[j].id === quizElement.selectedAnswer) {
                         selectedAnswer = quizElement.options[j].optionText;
                     }
                 }
-                if (selectedAnswer === quizElement.correctAnswer)
-                {
-                    count++;
+                if (selectedAnswer === quizElement.correctAnswer) {
+                    currScore++;
                 }
             }
         }
-        setScore(count)
+        setScore(currScore)
     }, [showAnswers])
     
     useEffect(() => { 
