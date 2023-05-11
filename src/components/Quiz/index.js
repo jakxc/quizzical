@@ -61,7 +61,7 @@ const Quiz = () => {
             }
         }
         setScore(currScore)
-    }, [showAnswers])
+    }, [showAnswers, quizData])
     
     useEffect(() => { 
         setLoading(true);
