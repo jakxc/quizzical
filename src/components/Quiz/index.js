@@ -1,12 +1,12 @@
 
+import './index.css'
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { nanoid } from 'nanoid'
-import QuizElement from './QuizElement.js'
-import blob from './images/blob.png';
+import QuizElement from './QuizElement'
 
-const Quiz = () =>
-{
+
+const Quiz = () => {
     const [score, setScore] = useState(0);
     const [showAnswers, setShowAnswers] = useState(false);
     const [quizData, setQuizData] = useState([]);
@@ -14,8 +14,7 @@ const Quiz = () =>
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     
-    const checkAnswers = () =>
-    {
+    const checkAnswers = () => {
         setShowAnswers(true)
     }
     
@@ -69,10 +68,14 @@ const Quiz = () =>
         fetch("https://opentdb.com/api.php?amount=5&category=31&difficulty=easy&encode=url3986")
             .then(res => res.json())
             .then(data => setQuizData(data.results.map(item => {
+                const shuffledOptions = shuffle(item.incorrect_answers.concat([item.correct_answer]))
+                                        .map(item => {
+                                            return { id: nanoid(), optionText: item }
+                                        });
                 return({
                         id: nanoid(),
                         question: item.question,
-                        options: shuffle(item.incorrect_answers.concat([item.correct_answer])).map(item => {return { id: nanoid(), optionText: item }}),
+                        options: shuffledOptions,
                         selectedAnswer: undefined,
                         correctAnswer: item.correct_answer
                     })
@@ -96,22 +99,22 @@ const Quiz = () =>
     })
     
     return (
-        <div className='app'>
-            {loading && <h1>Loading...</h1>}
+        <>
+            {loading && <pre>Loading...</pre>}
             {error && <pr>{JSON.stringify(error)}</pr>}
-            {!loading && !error && <div className='quiz-container'>
-                {quizElements}
-                {showAnswers ? 
-                    <div className='score-container'>
-                        <h3 className='score-text'>{"You scored " + score + "/5 correct answers "}</h3>
-                        <Link to="/"><button className='button'>Play Again</button></Link>
-                    </div> 
-                    :
-                    <button className='button' disabled={!allComplete} onClick={checkAnswers}>Check Answers</button>}
-            </div>}
-            <img className='blob1' src={blob} alt=''/>
-            <img className='blob2' src={blob} alt=''/>
-        </div>
+            {!loading
+                && !error 
+                && <div className='quiz-container'>
+                        {quizElements}
+                        {showAnswers  
+                            ? <div className='score-container'>
+                                <h3 className='score-text'>{"You scored " + score + "/5 correct answers "}</h3>
+                                <Link to="/"><button className='quiz-btn'>Play Again</button></Link>
+                            </div> 
+                            : <button className='quiz-btn' disabled={!allComplete} onClick={checkAnswers}>Check Answers</button>}
+                    </div>
+            }
+        </>
     )
 }
 

@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+  }
+
+.app {
+  display: flex;
+  justify-content: center;
+}
+
+.blob1 {
+    position: absolute;
+    margin:0px;
+    left: -100px;
+    bottom: -100px;
+    z-index:-1;
+    width:300px;
+  }
+  
+  .blob2 {
+    position: absolute;
+    margin:0px;
+    top: -120px;
+    right: -80px;
+    z-index:-1;
+    width:300px;
+  }

@@ -1,5 +1,6 @@
-const QuizElement = (props) =>
-{    
+import './index.css'
+
+const QuizElement = (props) => {    
     const styleButton = (option, id) => {
         if (props.showAnswers) {
             if (props.data.correctAnswer === option) { 

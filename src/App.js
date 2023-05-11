@@ -1,17 +1,19 @@
-import Home from './components/Home';
+import './App.css'
+import Layout from './components/Layout';
+import Home from './components/Home'
 import Quiz from './components/Quiz';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
+    <>
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/quiz" element={<Quiz />}></Route>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="quiz" element={<Quiz />} />
+          </Route>
         </Routes>
-      </Router>
-    </div>
+    </>
   );
 }
 
