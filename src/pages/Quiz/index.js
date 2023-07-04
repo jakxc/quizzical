@@ -3,8 +3,7 @@ import './index.css'
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { nanoid } from 'nanoid'
-import QuizElement from './QuizElement'
-
+import QuizElement from '../../components/QuizElement'
 
 const Quiz = () => {
     const [score, setScore] = useState(0);
@@ -18,8 +17,7 @@ const Quiz = () => {
         setShowAnswers(true)
     }
     
-    const selectAnswer = (event, questionID, optionID) =>
-    {
+    const selectAnswer = (event, questionID, optionID) => {
         setQuizData(() => {
             return (
                 quizData.map((item) => {
@@ -104,14 +102,14 @@ const Quiz = () => {
             {error && <pr>{JSON.stringify(error)}</pr>}
             {!loading
                 && !error 
-                && <div className='quiz-container'>
+                && <div className='quiz'>
                         {quizElements}
                         {showAnswers  
-                            ? <div className='score-container'>
-                                <h3 className='score-text'>{"You scored " + score + "/5 correct answers "}</h3>
-                                <Link to="/"><button className='quiz-btn'>Play Again</button></Link>
+                            ? <div className='quiz__score'>
+                                <h3 className='quiz__score__text'>{"You scored " + score + "/5 correct answers "}</h3>
+                                <Link to="/"><button className='quiz__btn'>Play Again</button></Link>
                             </div> 
-                            : <button className='quiz-btn' disabled={!allComplete} onClick={checkAnswers}>Check Answers</button>}
+                            : <button className='quiz__btn' disabled={!allComplete} onClick={checkAnswers}>Check Answers</button>}
                     </div>
             }
         </>

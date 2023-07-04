@@ -1,4 +1,4 @@
-.home-container {
+.home {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.home-title {
+.home__title {
     font-family: 'Karla';
     font-style: normal;
     font-weight: 700;
@@ -16,7 +16,7 @@
     color: #293264;
 }
 
-.home-subtitle {
+.home__subtitle {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
@@ -26,7 +26,7 @@
     color: #293264;
 }
 
-.home-btn {
+.home__btn {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -41,6 +41,6 @@
     cursor: pointer;
 }
 
-.home-btn:hover {
+.home__btn:hover {
     opacity: 90%;
 }

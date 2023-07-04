@@ -1,7 +1,17 @@
-html, body {
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
   height: 100%;
 }
 
+
+/* General styling */
 body {
   display: flex;
   flex-direction: column;

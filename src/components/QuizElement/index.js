@@ -23,19 +23,19 @@ const QuizElement = (props) => {
     
     const optionElements = props.data.options.map(item => 
         <button
+            className='quiz-option'
             key={item.id}
             onClick={(event) => props.selectAnswer(event, props.id, item.id)}
             style={styleButton(item.optionText, item.id)}
             disabled={props.showAnswers}
-            className='quiz-option'
         >{decodeURIComponent(item.optionText)}
         </button>
     )
         
     return (
-        <div className='quiz-question-container' >
-            <h1 className='quiz-question'>{decodeURIComponent(props.data.question)}</h1>
-            <div className='quiz-options-container'>{optionElements}</div>
+        <div className='quiz-element' >
+            <h1 className='quiz-element__question'>{decodeURIComponent(props.data.question)}</h1>
+            <div className='quiz-element__options'>{optionElements}</div>
             <hr className='quiz-divider' />
         </div>
     )

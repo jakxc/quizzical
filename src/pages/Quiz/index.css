@@ -1,16 +1,16 @@
-.quiz-container {
+.quiz {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.score-container {
+.quiz__score {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.score-text {
+.quiz__score__text {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -20,7 +20,7 @@
     color: #293264;
 }
 
-.quiz-btn {
+.quiz__btn {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -36,11 +36,11 @@
     cursor: pointer;
 }
 
-.quiz-btn:hover {
+.quiz__btn:hover {
     opacity: 90%;
 }
   
-.quiz-btn:disabled {
+.quiz__btn:disabled {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;

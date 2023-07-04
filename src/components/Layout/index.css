@@ -7,20 +7,20 @@
   justify-content: center;
 }
 
-.blob1 {
+.blob-left {
     position: absolute;
-    margin:0px;
+    margin: 0px;
     left: -100px;
     bottom: -100px;
     z-index:-1;
     width:300px;
   }
   
-  .blob2 {
+  .blob-right {
     position: absolute;
-    margin:0px;
+    margin: 0px;
     top: -120px;
     right: -80px;
     z-index:-1;
-    width:300px;
+    width: 300px;
   }
